@@ -10,6 +10,7 @@ let main argv =
     |> Words.getWords
     |> fun l -> Map.empty |> Words.countWords l
     |> Map.toList
+    |> List.sortWith (fun (_, v1) (_, v2) -> v2 - v1)
     |> CloudCreator.drawCloud g [] (512.0f, 512.0f) 0.0
     
     img.Save("test.png")
