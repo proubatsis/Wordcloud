@@ -14,7 +14,7 @@
             | [] ->
                 let box = new RectangleF(cx - size.Width / 2.0f, cy - size.Height / 2.0f, size.Width, size.Height)
                 g.DrawString(k, font, new SolidBrush(Seq.pick (fun c -> Some(c)) colors), box.X, box.Y)
-                drawCloud g (List.append [box] boxes) (cx, cy) angle (Seq.skip 1 colors) t
+                drawCloud g [box] (cx, cy) angle (Seq.skip 1 colors) t
             | _ ->
                 let (dx, dy) = (cos angle, sin angle)
                 let (x, y) = findCoord boxes size (cx, cy) (dx, dy) 10.0
