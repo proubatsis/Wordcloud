@@ -11,6 +11,9 @@ let main argv =
     |> fun l -> Map.empty |> Words.countWords l
     |> Map.toList
     |> List.sortWith (fun (_, v1) (_, v2) -> v2 - v1)
+    |> fun lst ->
+        let (_, max) = List.head lst
+        List.map (fun (k, v) -> (k, float v / float max)) lst
     |> CloudCreator.drawCloud g [] (512.0f, 512.0f) 0.0
     
     img.Save("test.png")
