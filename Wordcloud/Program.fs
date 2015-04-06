@@ -57,14 +57,14 @@ let main argv =
         img.Save(imageFile)
     
         //Create the form and display the image
-        use cloudPanel = new Panel()
-        cloudPanel.Paint.Add(fun e -> e.Graphics.DrawImage(img, new Point(0, 0)))
-        cloudPanel.Size <- new Size(width, width)
+        use cloudPictureBox = new PictureBox()
+        cloudPictureBox.Image <- img
+        cloudPictureBox.Size <- new Size(width, height)
 
         use form = new Form()
         form.Text <- "Word Cloud"
         form.Size <- new Size(width, width)
-        form.Controls.Add cloudPanel
+        form.Controls.Add cloudPictureBox
         Application.Run(form)
 
         0 // return an integer exit code
