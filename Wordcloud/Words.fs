@@ -18,12 +18,10 @@
         |> filter
 
     let filterCommon =
-        let commonWords = [""; "the"; "if"; "a"; "to"; "is"; "i"; "will"; "be"; "we"; "in"; "at"; "of";
-        "and"; "are"; "all"; "that"; "with"; "his"; "when"; "able"; "go"; "as"; "let"; "for"; "by"; "but";
-        "you"; "must"; "come"; "our"; "which"; "not"; "on"; "an"; "out"; "no"; "has"; "it"; "am"; "us"; "to";
-        "too"; "who"; "up"; "so"; "some"; "they"; "into"; "still"; "their"; "there"; "can"; "from"; "this"]
+        let commonWords = ["the"; "will"; "that"; "with"; "when"; "able"; "must"; "come"; "which"; "some"; "they"; "into"; "still";
+        "their"; "there"; "from"; "this"; "those"; "cannot"; "have"; "back"; "here"]
 
-        List.filter (fun s -> not <| List.exists (fun cs -> s = cs) commonWords)
+        List.filter (fun (s:string) -> not <| List.exists (fun cs -> s = cs || s.Length <= 3) commonWords)
 
     let getWords (str:string) =
         str.ToLower()
