@@ -57,14 +57,8 @@ let main argv =
         img.Save(imageFile)
     
         //Create the form and display the image
-        use cloudPictureBox = new PictureBox()
-        cloudPictureBox.Image <- img
-        cloudPictureBox.Size <- new Size(width, height)
-
-        use form = new Form()
-        form.Text <- "Word Cloud"
-        form.Size <- new Size(width, width)
-        form.Controls.Add cloudPictureBox
-        Application.Run(form)
+        GUI.createForm "Word Cloud" (width, height)
+        |> GUI.addControlToForm (GUI.createPictureBox (width, height) (0, 0) img)
+        |> Application.Run
 
         0 // return an integer exit code

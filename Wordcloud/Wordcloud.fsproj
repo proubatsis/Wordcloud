@@ -52,6 +52,7 @@
     <Compile Include="Words.fs" />
     <Compile Include="CloudCreator.fs" />
     <Compile Include="ColorSchemes.fs" />
+    <Compile Include="GUI.fs" />
     <Compile Include="Program.fs" />
     <None Include="App.config" />
   </ItemGroup>
