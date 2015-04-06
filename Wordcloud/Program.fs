@@ -8,15 +8,24 @@ let main argv =
     let textFile = System.Console.ReadLine()
     System.Console.Write("Output File: ")
     let imageFile = System.Console.ReadLine()
+    System.Console.WriteLine("\nEnter the letter of your desired color scheme.\na)RGB b)Bright c)Dark")
+    let colorChoice = System.Console.ReadKey().KeyChar
+
+    let (background, colors) =
+        match colorChoice with
+        | 'b' -> (ColorSchemes.BG_Bright, ColorSchemes.Bright)
+        | 'c' -> (ColorSchemes.BG_Dark, ColorSchemes.Dark)
+        | _ -> (ColorSchemes.BG_RGB, ColorSchemes.RGB)
 
     if not <| System.IO.File.Exists textFile then
         System.Console.WriteLine("The text file - {0} - does not exist!", textFile)
         System.Console.ReadKey() |> ignore
         0
     else
-        use img = new Bitmap(1024, 1024)
+        let (width, height) = (1024, 1024)
+        use img = new Bitmap(width, height)
         use g = Graphics.FromImage(img)
-        g.Clear(ColorSchemes.BG_RGB)
+        g.Clear(background)
 
         System.IO.File.ReadAllText(textFile)
         |> Words.getWords
@@ -26,18 +35,18 @@ let main argv =
         |> fun lst ->
             let (_, max) = List.head lst
             List.map (fun (k, v) -> (k, float v / float max)) lst
-        |> CloudCreator.drawCloud g [] (512.0f, 512.0f) 0.0 ColorSchemes.RGB
+        |> CloudCreator.drawCloud g [] (float32 width / 2.0f, float32 height / 2.0f) 0.0 colors
 
         img.Save(imageFile)
     
         //Create the form and display the image
         use cloudPanel = new Panel()
         cloudPanel.Paint.Add(fun e -> e.Graphics.DrawImage(img, new Point(0, 0)))
-        cloudPanel.Size <- new Size(1024, 1024)
+        cloudPanel.Size <- new Size(width, width)
 
         use form = new Form()
         form.Text <- "Word Cloud"
-        form.Size <- new Size(1024, 1024)
+        form.Size <- new Size(width, width)
         form.Controls.Add cloudPanel
         Application.Run(form)
 
