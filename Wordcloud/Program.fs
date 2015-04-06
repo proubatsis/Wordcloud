@@ -4,9 +4,7 @@
 let main argv = 
     use img = new Bitmap(1024, 1024)
     use g = Graphics.FromImage(img)
-    g.Clear(Color.White)
-
-    let colors = seq { while true do yield! [Color.Red; Color.Green; Color.Blue]}
+    g.Clear(ColorSchemes.BG_RGB)
 
     System.IO.File.ReadAllText("test.txt")
     |> Words.getWords
@@ -16,7 +14,7 @@ let main argv =
     |> fun lst ->
         let (_, max) = List.head lst
         List.map (fun (k, v) -> (k, float v / float max)) lst
-    |> CloudCreator.drawCloud g [] (512.0f, 512.0f) 0.0 colors
+    |> CloudCreator.drawCloud g [] (512.0f, 512.0f) 0.0 ColorSchemes.RGB
     
     img.Save("test.png")
 
