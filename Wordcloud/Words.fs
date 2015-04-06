@@ -19,7 +19,7 @@
 
     let filterCommon =
         let commonWords = ["the"; "will"; "that"; "with"; "when"; "able"; "must"; "come"; "which"; "some"; "they"; "into"; "still";
-        "their"; "there"; "from"; "this"; "those"; "cannot"; "have"; "back"; "here"]
+        "their"; "there"; "from"; "this"; "those"; "cannot"; "have"; "back"; "here"; "what"; "hath"; "than"; "then"; "know"; "your"; "also"; "upon"]
 
         List.filter (fun (s:string) -> not <| List.exists (fun cs -> s = cs || s.Length <= 3) commonWords)
 
