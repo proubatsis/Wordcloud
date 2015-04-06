@@ -1,4 +1,9 @@
-﻿module ColorSchemes
+﻿(*
+    Created by Panagiotis Roubatsis
+    Description: Different color schemes represented as infinite sequences of colors.
+*)
+
+module ColorSchemes
     open System.Drawing
 
     let RGB = seq { while true do yield! [Color.Red; Color.Green; Color.Blue]}

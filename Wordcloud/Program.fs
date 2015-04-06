@@ -1,4 +1,13 @@
-﻿open System.Windows.Forms
+﻿(*
+    Created by Panagiotis Roubatsis
+
+    Description: An application that creates
+    a word cloud given a text file. It displays
+    the text file in a form and then saves the image
+    to a file.
+*)
+
+open System.Windows.Forms
 open System.Drawing
 
 [<EntryPoint>]
@@ -17,16 +26,23 @@ let main argv =
         | 'c' -> (ColorSchemes.BG_Dark, ColorSchemes.Dark)
         | _ -> (ColorSchemes.BG_RGB, ColorSchemes.RGB)
 
+    //Make sure the file exists before continuing
     if not <| System.IO.File.Exists textFile then
         System.Console.WriteLine("The text file - {0} - does not exist!", textFile)
         System.Console.ReadKey() |> ignore
         0
     else
+        //Create a blank image
         let (width, height) = (1024, 1024)
         use img = new Bitmap(width, height)
         use g = Graphics.FromImage(img)
         g.Clear(background)
 
+        (*  Read the file, count the words,
+            sort the count in descending order,
+            normalize the counts relative to the largest count,
+            draw the word cloud to the image.
+        *)
         System.IO.File.ReadAllText(textFile)
         |> Words.getWords
         |> fun l -> Map.empty |> Words.countWords l
@@ -37,6 +53,7 @@ let main argv =
             List.map (fun (k, v) -> (k, float v / float max)) lst
         |> CloudCreator.drawCloud g [] (float32 width / 2.0f, float32 height / 2.0f) 0.0 colors
 
+        //Save the image to a file
         img.Save(imageFile)
     
         //Create the form and display the image
