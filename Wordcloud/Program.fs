@@ -6,6 +6,8 @@ let main argv =
     use g = Graphics.FromImage(img)
     g.Clear(Color.White)
 
+    let colors = seq { while true do yield! [Color.Red; Color.Green; Color.Blue]}
+
     System.IO.File.ReadAllText("test.txt")
     |> Words.getWords
     |> fun l -> Map.empty |> Words.countWords l
@@ -14,7 +16,7 @@ let main argv =
     |> fun lst ->
         let (_, max) = List.head lst
         List.map (fun (k, v) -> (k, float v / float max)) lst
-    |> CloudCreator.drawCloud g [] (512.0f, 512.0f) 0.0
+    |> CloudCreator.drawCloud g [] (512.0f, 512.0f) 0.0 colors
     
     img.Save("test.png")
 
