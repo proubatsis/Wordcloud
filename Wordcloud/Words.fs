@@ -19,7 +19,9 @@
 
     let filterCommon =
         let commonWords = [""; "the"; "if"; "a"; "to"; "is"; "i"; "will"; "be"; "we"; "in"; "at"; "of";
-        "and"; "are"; "all"; "that"; "with"; "his"; "when"; "able"; "go"; "as"; "let"; "for"; "by"; "but"]
+        "and"; "are"; "all"; "that"; "with"; "his"; "when"; "able"; "go"; "as"; "let"; "for"; "by"; "but";
+        "you"; "must"; "come"; "our"; "which"; "not"; "on"; "an"; "out"; "no"; "has"; "it"; "am"; "us"; "to";
+        "too"; "who"; "up"; "so"; "some"; "they"; "into"; "still"; "their"; "there"; "can"; "from"; "this"]
 
         List.filter (fun s -> not <| List.exists (fun cs -> s = cs) commonWords)
 
