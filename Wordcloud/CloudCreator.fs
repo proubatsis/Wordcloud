@@ -9,7 +9,8 @@
     let rec drawCloud (g:Graphics) (boxes:RectangleF list) (cx, cy) angle colors = function
         | [] -> ()
         | (k, v)::t ->
-            let font = new Font(FontFamily.GenericSansSerif, v * 64.0 |> float32)
+            let fontSize = 2.0 ** (3.0 * (v - 1.0))
+            let font = new Font(FontFamily.GenericSansSerif, fontSize * 64.0 |> float32)
             let size = g.MeasureString(k, font)
             match boxes with
             | [] ->
