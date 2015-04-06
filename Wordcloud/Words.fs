@@ -4,7 +4,7 @@
 
     let filterSpecial (str:string) =
         let isSpecial (c:char) =
-            let ac = System.Convert.ToByte(c) |> int
+            let ac = c |> int
             if ac >= 33 && ac <= 47 || ac >= 58 && ac <= 64 || ac >= 91 && ac <= 96 || ac >= 123 && ac <= 126 then true else false
 
         let rec filter (lst:char list) =
